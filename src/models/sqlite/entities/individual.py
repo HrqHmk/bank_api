@@ -1,7 +1,7 @@
 from sqlalchemy import Column, String, BIGINT, Float
 from src.models.sqlite.settings.base import Base
 
-class Individual(Base):
+class IndividualTable(Base):
     __tablename__ = "pessoa_fisica"
 
     id = Column(BIGINT, primary_key=True, autoincrement=True)
