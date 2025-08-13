@@ -48,3 +48,15 @@ def test_list_legal_entity():
 
     mock_connection.session.query.assert_called_once_with(LegalEntityTable)
     assert response[0].nome_fantasia == "Jhon Doe SA"
+
+def test_withdraw():
+    mock_connection = MockConnection()
+    repository = LegalEntityRepository(mock_connection)
+    repository.withdraw(1, 200.0)
+
+    mock_connection.session.query.assert_called_once_with(LegalEntityTable)
+    mock_connection.session.filter.assert_called_once_with(LegalEntityTable.id == 1)
+    mock_connection.session.update.assert_called_once()
+    mock_connection.session.update.assert_called_once_with({
+        LegalEntityTable.saldo: LegalEntityTable.saldo - 200.0
+    })

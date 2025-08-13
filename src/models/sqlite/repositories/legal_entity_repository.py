@@ -40,3 +40,17 @@ class LegalEntityRepository(LegalEntityRepositoryInterface):
                 return legal_entities
             except NoResultFound:
                 return []
+
+    def withdraw(self, legal_entity_id, amount):
+        with self.__db_connection as database:
+            try:
+                (
+                    database.session
+                    .query(LegalEntityTable)
+                    .filter(LegalEntityTable.id == legal_entity_id)
+                    .update({LegalEntityTable.saldo: LegalEntityTable.saldo - amount})
+                )
+                database.session.commit()
+            except Exception as exception:
+                database.session.roollback()
+                raise exception

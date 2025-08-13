@@ -48,3 +48,15 @@ def test_list_individuals():
 
     mock_connection.session.query.assert_called_once_with(IndividualTable)
     assert response[0].nome_completo == "Jhon Doe"
+
+def test_withdraw():
+    mock_connection = MockConnection()
+    repository = IndividualRepository(mock_connection)
+    repository.withdraw(1, 200.0)
+
+    mock_connection.session.query.assert_called_once_with(IndividualTable)
+    mock_connection.session.filter.assert_called_once_with(IndividualTable.id == 1)
+    mock_connection.session.update.assert_called_once()
+    mock_connection.session.update.assert_called_once_with({
+        IndividualTable.saldo: IndividualTable.saldo - 200.0
+    })

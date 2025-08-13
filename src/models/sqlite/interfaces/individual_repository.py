@@ -18,3 +18,7 @@ class IndividualRepositoryInterface(ABC):
     @abstractmethod
     def list_individuals(self)-> list[IndividualTable]:
         pass
+    
+    @abstractmethod
+    def withdraw(self, individual_id: int, amount: float)-> None:
+        pass

@@ -41,3 +41,17 @@ class IndividualRepository(IndividualRepositoryInterface):
                 return individuals
             except NoResultFound:
                 return []
+
+    def withdraw(self, individual_id: int, amount: float):
+        with self.__db_connection as database:
+            try:
+                (
+                    database.session
+                    .query(IndividualTable)
+                    .filter(IndividualTable.id == individual_id)
+                    .update({IndividualTable.saldo: IndividualTable.saldo - amount})
+                )
+                database.session.commit()
+            except Exception as exception:
+                database.session.roollback()
+                raise exception
