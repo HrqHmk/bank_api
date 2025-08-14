@@ -1,7 +1,8 @@
 import re
 from src.models.sqlite.repositories.individual_repository import IndividualRepository
+from .interfaces.individual_insert_controller import IndividualInsertControllerInterface
 
-class IndividualInsertController():
+class IndividualInsertController(IndividualInsertControllerInterface):
     def __init__(self, individual_repository: IndividualRepository)-> None:
         self.__individual_repository = individual_repository
     
