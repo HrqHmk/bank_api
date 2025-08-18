@@ -20,5 +20,5 @@ class IndividualRepositoryInterface(ABC):
         pass
     
     @abstractmethod
-    def withdraw(self, individual_id: int, amount: float)-> None:
+    def withdraw(self, individual_id: int, amount: float)-> float:
         pass

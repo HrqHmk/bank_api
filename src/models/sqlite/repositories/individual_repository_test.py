@@ -17,7 +17,7 @@ class MockConnection:
                             celular="999999999", 
                             email="jhondoe@mail.com",
                             categoria="category test",
-                            saldo=200.00
+                            saldo=300.00
 
                         )
                     ]
@@ -52,11 +52,8 @@ def test_list_individuals():
 def test_withdraw():
     mock_connection = MockConnection()
     repository = IndividualRepository(mock_connection)
-    repository.withdraw(1, 200.0)
+    response = repository.withdraw(1, 200.0)
 
     mock_connection.session.query.assert_called_once_with(IndividualTable)
     mock_connection.session.filter.assert_called_once_with(IndividualTable.id == 1)
-    mock_connection.session.update.assert_called_once()
-    mock_connection.session.update.assert_called_once_with({
-        IndividualTable.saldo: IndividualTable.saldo - 200.0
-    })
+    assert response == 100.0
