@@ -24,5 +24,5 @@ class LegalEntityRepositoryInterface(ABC):
         pass
 
     @abstractmethod
-    def get_legal_entity_by_id(self, individual_id: int)->LegalEntityTable:
+    def get_legal_entity_by_id(self, legal_entity_id: int)->LegalEntityTable:
         pass
