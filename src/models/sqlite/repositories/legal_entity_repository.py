@@ -56,3 +56,17 @@ class LegalEntityRepository(LegalEntityRepositoryInterface):
             except Exception as exception:
                 database.session.roollback()
                 raise exception
+
+    def get_legal_entity_by_id(self, legal_entity_id: int)->LegalEntityTable:
+        with self.__db_connection as database:
+            try:
+                legal_entity =(
+                    database.session
+                        .query(LegalEntityTable)
+                        .filter(LegalEntityTable.id == legal_entity_id)
+                        .first()
+                )
+
+                return legal_entity
+            except NoResultFound:
+                return None

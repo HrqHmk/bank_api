@@ -22,3 +22,7 @@ class LegalEntityRepositoryInterface(ABC):
     @abstractmethod
     def withdraw(self, legal_entity_id: int, amount: float)-> float:
         pass
+
+    @abstractmethod
+    def get_legal_entity_by_id(self, individual_id: int)->LegalEntityTable:
+        pass

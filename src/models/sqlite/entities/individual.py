@@ -14,4 +14,4 @@ class IndividualTable(Base):
     saldo = Column(Float)
 
     def __repr__(self):
-        return f"Pessoa Física [name={self.nome_fantasia}]"
+        return f"Pessoa Física [name={self.nome_completo}]"

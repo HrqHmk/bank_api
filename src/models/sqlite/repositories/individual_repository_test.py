@@ -57,3 +57,11 @@ def test_withdraw():
     mock_connection.session.query.assert_called_once_with(IndividualTable)
     mock_connection.session.filter.assert_called_once_with(IndividualTable.id == 1)
     assert response == 100.0
+
+def test_get_individual_by_id():
+    mock_connection = MockConnection()
+    repository = IndividualRepository(mock_connection)
+    response = repository.get_individual_by_id(1)
+    mock_connection.session.query.assert_called_once_with(IndividualTable)
+    mock_connection.session.filter.assert_called_once_with(IndividualTable.id == 1)
+    assert response.nome_completo == "Jhon Doe"

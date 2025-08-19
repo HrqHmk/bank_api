@@ -57,3 +57,17 @@ class IndividualRepository(IndividualRepositoryInterface):
             except Exception as exception:
                 database.session.roollback()
                 raise exception
+
+    def get_individual_by_id(self, individual_id: int)->IndividualTable:
+        with self.__db_connection as database:
+            try:
+                individual =(
+                    database.session
+                        .query(IndividualTable)
+                        .filter(IndividualTable.id == individual_id)
+                        .first()
+                )
+
+                return individual
+            except NoResultFound:
+                return None

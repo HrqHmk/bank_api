@@ -57,3 +57,11 @@ def test_withdraw():
     mock_connection.session.query.assert_called_once_with(LegalEntityTable)
     mock_connection.session.filter.assert_called_once_with(LegalEntityTable.id == 1)
     assert response == 100.0
+
+def test_get_individual_by_id():
+    mock_connection = MockConnection()
+    repository = LegalEntityRepository(mock_connection)
+    response = repository.get_legal_entity_by_id(1)
+    mock_connection.session.query.assert_called_once_with(LegalEntityTable)
+    mock_connection.session.filter.assert_called_once_with(LegalEntityTable.id == 1)
+    assert response.nome_fantasia == "Jhon Doe SA"
