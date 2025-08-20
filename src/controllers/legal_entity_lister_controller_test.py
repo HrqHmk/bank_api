@@ -1,49 +1,49 @@
-from src.models.sqlite.entities.individual import IndividualTable
-from .individual_lister_controller import IndividualListerController
+from src.models.sqlite.entities.legal_entity import LegalEntityTable
+from .legal_entity_lister_controller import LegalEntityListerController
 
-class MockIndividualsRepository:
-    def list_individuals(self):
+class MockLegalEntityRepository:
+    def list_legal_entity(self):
         return [
-            IndividualTable(
-                nome_completo="Jhon Doe", 
+            LegalEntityTable(
+                nome_fantasia="Jhon Doe SA", 
                 idade=30,
-                email="jhondoe@mail.com",
+                email_corporativo="jhondoe@mail.com",
                 celular="99 99999999",
                 categoria="category 1",
-                renda_mensal=200.00,
+                faturamento=200.00,
                 saldo=200.00 ,
                 id=4
             ),
-            IndividualTable(
-                nome_completo="Jhon Doe 2", 
+            LegalEntityTable(
+                nome_fantasia="Jhon Doe SA 2", 
                 idade=31,
-                email="jhondoe2@mail.com",
+                email_corporativo="jhondoe2@mail.com",
                 celular="99 99999999",
                 categoria="category 2",
-                renda_mensal=300.00,
+                faturamento=300.00,
                 saldo=300.00 ,
                 id=6
             ),
         ]
 
-def test_list_individuals():
-    controller = IndividualListerController(MockIndividualsRepository())
+def test_list_legal_entities():
+    controller = LegalEntityListerController(MockLegalEntityRepository())
     response = controller.list()
 
     expected_response = {
         "data":{
-            "type": "Individuals",
+            "type": "Legal Entities",
             "count": 2,
             "attributes": [
                 { 
-                    "nome": "Jhon Doe", 
+                    "nome": "Jhon Doe SA", 
                     "email": "jhondoe@mail.com",
                     "celular": "99 99999999",
                     "categoria": "category 1",
                     "id": 4
                 },
                 { 
-                    "nome": "Jhon Doe 2", 
+                    "nome": "Jhon Doe SA 2", 
                     "email": "jhondoe2@mail.com",
                     "celular": "99 99999999",
                     "categoria": "category 2",
