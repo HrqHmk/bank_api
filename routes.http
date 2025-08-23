@@ -1,0 +1,51 @@
+@URL=http://127.0.0.1:3000
+
+### Insert Individual
+POST {{URL}}/individual
+Content-Type: application/json
+
+{
+    "renda_mensal": 200.00, 
+    "idade": 30,
+    "nome_completo": "Jhon Doe", 
+    "celular": "999999999", 
+    "email": "jhondoe@mail.com",
+    "categoria": "category test",
+    "saldo": 300.00
+}
+
+### Lister Individuals
+GET {{URL}}/individual
+
+### Withdraw Individual
+PATCH {{URL}}/individual/withdraw/4
+Content-Type: application/json
+
+{
+    "amount": 100.00
+}
+
+### Insert Legal Entity
+POST {{URL}}/legal_entity
+Content-Type: application/json
+
+{
+    "faturamento": 300.00, 
+    "idade": 30,
+    "nome_fantasia": "Jhon Doe SA", 
+    "celular": "999999999", 
+    "email_corporativo": "jhondoe@mail.com",
+    "categoria": "category test",
+    "saldo": 300.00
+}
+
+### Lister Legal Entity
+GET {{URL}}/legal_entity
+
+### Withdraw Legal Entity
+PATCH {{URL}}/legal_entity/withdraw/4
+Content-Type: application/json
+
+{
+    "amount": 100.00
+}
