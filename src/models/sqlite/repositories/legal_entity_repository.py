@@ -28,7 +28,7 @@ class LegalEntityRepository(LegalEntityRepositoryInterface):
                     saldo=saldo
                 )
                 database.session.add(legal_entity_data)
-                database.session.commit(legal_entity_data)
+                database.session.commit()
             except Exception as exception:
                 database.session.rollback()
                 raise exception

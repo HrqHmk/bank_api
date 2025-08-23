@@ -21,7 +21,6 @@ class IndividualRepository(IndividualRepositoryInterface):
                 individual_data = IndividualTable(
                     renda_mensal=renda_mensal,
                     idade=idade,
-
                     nome_completo=nome_completo,
                     celular=celular,
                     email=email,
@@ -29,7 +28,7 @@ class IndividualRepository(IndividualRepositoryInterface):
                     saldo=saldo
                 )
                 database.session.add(individual_data)
-                database.session.commit(individual_data)
+                database.session.commit()
             except Exception as exception:
                 database.session.rollback()
                 raise exception
