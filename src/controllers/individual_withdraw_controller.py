@@ -1,6 +1,7 @@
 from typing import Optional
 from src.models.sqlite.repositories.individual_repository import IndividualRepository
 from src.models.sqlite.entities.individual import IndividualTable
+from src.errors.errors_type.http_not_found import HttpNotFoundError
 from .interfaces.individual_withdraw_controller import IndividualWithdrawControllerInterface
 
 class IndividualWithdrawController(IndividualWithdrawControllerInterface):
@@ -16,7 +17,7 @@ class IndividualWithdrawController(IndividualWithdrawControllerInterface):
     def __individual_exists(self, individual_id)->None:
         response: Optional[IndividualTable] = self.__individual_repository.get_individual_by_id(individual_id) # pylint: disable=C0301
         if response is None:
-            raise Exception("Usuário não cadastrado")
+            raise HttpNotFoundError("Usuário não cadastrado")
 
     def __withdraw_in_db(self, individual_id, amount)->float:
         amount = self.__individual_repository.withdraw(individual_id, amount)

@@ -1,5 +1,6 @@
 import re
 from src.models.sqlite.repositories.legal_entity_repository import LegalEntityRepository
+from src.errors.errors_type.http_bad_request import HttpBadRequestError
 from .interfaces.legal_entity_insert_controller import LegalEntityInsertControllerInterface
 
 class LegalEntityInsertController(LegalEntityInsertControllerInterface):
@@ -28,11 +29,11 @@ class LegalEntityInsertController(LegalEntityInsertControllerInterface):
         non_valid_caracters = re.compile(r'[^a-zA-Z\s]')
 
         if non_valid_caracters.search(nome_fantasia):
-            raise Exception("Nome fantasia inválido...")
+            raise HttpBadRequestError("Nome fantasia inválido...")
 
     def __validate_faturamento(self, faturamento: float)-> None:
         if faturamento < 0 or faturamento == 0:
-            raise Exception("Faturamento inválido")
+            raise HttpBadRequestError("Faturamento inválido")
     
     def __insert_legal_entity(
             self,

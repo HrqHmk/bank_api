@@ -1,6 +1,7 @@
 from typing import Optional
 from src.models.sqlite.repositories.legal_entity_repository import LegalEntityRepository
 from src.models.sqlite.entities.legal_entity import LegalEntityTable
+from src.errors.errors_type.http_not_found import HttpNotFoundError
 from .interfaces.legal_entity_withdraw_controller import LegalEntityWithdrawControllerInterface
 
 class LegalEntityWithdrawController(LegalEntityWithdrawControllerInterface):
@@ -16,7 +17,7 @@ class LegalEntityWithdrawController(LegalEntityWithdrawControllerInterface):
     def __legal_entity_exists(self, legal_entity_id)->None:
         response: Optional[LegalEntityTable] = self.__legal_entity_repository.get_legal_entity_by_id(legal_entity_id) # pylint: disable=C0301
         if response is None:
-            raise Exception("Entidade não cadastrada")
+            raise HttpNotFoundError("Entidade não cadastrada")
 
     def __withdraw_in_db(self, legal_entity_id, amount)->float:
         amount = self.__legal_entity_repository.withdraw(legal_entity_id, amount)

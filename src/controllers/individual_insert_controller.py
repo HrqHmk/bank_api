@@ -1,5 +1,6 @@
 import re
 from src.models.sqlite.repositories.individual_repository import IndividualRepository
+from src.errors.errors_type.http_bad_request import HttpBadRequestError
 from .interfaces.individual_insert_controller import IndividualInsertControllerInterface
 
 class IndividualInsertController(IndividualInsertControllerInterface):
@@ -28,11 +29,11 @@ class IndividualInsertController(IndividualInsertControllerInterface):
         non_valid_caracters = re.compile(r'[^a-zA-Z\s]')
 
         if non_valid_caracters.search(nome_completo):
-            raise Exception("Nome da pessoa inválido...")
+            raise HttpBadRequestError("Nome da pessoa inválido...")
 
     def __validate_renda_mensal(self, renda_mensal: float)-> None:
         if renda_mensal < 0 or renda_mensal == 0:
-            raise Exception("Renda Mensal inválida")
+            raise HttpBadRequestError("Renda Mensal inválida")
     
     def __insert_individual(
             self,
